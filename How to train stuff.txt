@@ -1,0 +1,19 @@
+1. Clone this repository
+2. Have python installed
+3. Install the requirements of the requirements.txt
+	a. This can be done with anaconda or pip (e.g.:pip install tqdm) (I used a conda environment "gpt-2" that was a clone of the basic python env) "conda create --name gpt-2 --clone base"
+	b. Install tensorflow (for CPU "pip install tensorflow", for GPU "pip install tensorflow-gpu")
+	c. If you want to use the GPU you also need to install CUDA 10.0 (Tensorflow 1.14 did not find files from CUDA 10.1) and cuDNN 7.6.1 (https://developer.nvidia.com/cuda-downloads)
+		c1. On windows you also need VisualStudio 2017 (I installed 2019 first, may also work), but the CUDA installation will tell you that
+		c2. I had the issue that when running 
+		c3. add them to your PATH variable:
+			C:\tools\cuda\bin
+			C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
+4. activate the conda environement ("activate gpt-2")
+5. Go into gpt-2 directory
+6. For Windows: "set PYTHONPATH=src" For Linux "PYTHONPATH=src"
+7. (only needs to be done once) Download model "python download_model.py 117M" 	 
+8. Encode your data set as Byte-Pair Encoding (only needs to be done once per dataset) "python encode.py data\<yourData>.txt data\<yourData>.npz"
+	a. Then only use the npz file
+	Note: it is possible to give the encoding a file or a whole directory. It will go through every file in the directory then.
+9.
