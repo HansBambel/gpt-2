@@ -1,3 +1,5 @@
+### Set-up ###
+A) Without Docker
 1. Clone this repository
 2. Have python installed
 3. Install the requirements of the requirements.txt
@@ -10,10 +12,18 @@
 			C:\tools\cuda\bin
 			C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
 4. activate the conda environement ("activate gpt-2")
-5. Go into gpt-2 directory
-6. For Windows: "set PYTHONPATH=src" For Linux "PYTHONPATH=src"
-7. (only needs to be done once) Download model "python download_model.py 117M" 	 
-8. Encode your data set as Byte-Pair Encoding (only needs to be done once per dataset) "python encode.py data\<yourData>.txt data\<yourData>.npz"
-	a. Then only use the npz file
+B) With Docker
+
+### Training ###
+1. Go into gpt-2 directory
+2. For Windows: "set PYTHONPATH=src" For Linux "PYTHONPATH=src"
+3. (only needs to be done once) Download model "python download_model.py 117M" 	 
+4. Encode your data set as Byte-Pair Encoding (only needs to be done once per dataset) "python encode.py data\<yourData>.txt data\<yourData>.npz"
+	a. Then only use the npz file for training
 	Note: it is possible to give the encoding a file or a whole directory. It will go through every file in the directory then.
-9.
+5. python train.py --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000
+	a. To resume from the latest checkpoint (there will be a folder checkpoint) just run the line from 5. again
+	b. To resume from a specific checkpoint "python train.py --restore_from path/to/checkpoint --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
+	c. To start fresh either delete the folder or run "python train.py --restore_from "fresh" --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
+
+### Generating ###

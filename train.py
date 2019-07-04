@@ -202,7 +202,7 @@ def main():
                 sess,
                 os.path.join(CHECKPOINT_DIR, args.run_name, 'model'),
                 global_step=counter)
-            with open(counter_path, 'w') as fp:
+            with open(counter_path, 'w', encoding='utf-8') as fp:
                 fp.write(str(counter) + '\n')
 
         def generate_samples():
@@ -224,7 +224,7 @@ def main():
             maketree(os.path.join(SAMPLE_DIR, args.run_name))
             with open(
                     os.path.join(SAMPLE_DIR, args.run_name,
-                                 'samples-{}').format(counter), 'w') as fp:
+                                 'samples-{}').format(counter), 'w', encoding='utf-8') as fp:
                 fp.write('\n'.join(all_text))
 
         def validation():
