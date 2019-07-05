@@ -18,12 +18,22 @@ B) With Docker
 1. Go into gpt-2 directory
 2. For Windows: "set PYTHONPATH=src" For Linux "PYTHONPATH=src"
 3. (only needs to be done once) Download model "python download_model.py 117M" 	 
-4. Encode your data set as Byte-Pair Encoding (only needs to be done once per dataset) "python encode.py data\<yourData>.txt data\<yourData>.npz"
+4. Encode your data set as Byte-Pair Encoding (only needs to be done once per dataset) "python encode.py --model_name 117M data\<yourData>.txt data\<yourData>.npz"
 	a. Then only use the npz file for training
+	Note: When using another model this needs to be done again
 	Note: it is possible to give the encoding a file or a whole directory. It will go through every file in the directory then.
-5. python train.py --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000
+(The parameters for training a model are well described in train.py)
+5a. Train the 117M model: "python train.py --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
+5b. Training the 345M model did not work since there we did not have enough VRAM even with switching to SGD instead of ADAM.
+	"python train.py --model_name 345M --run_name run345M --dataset data\storyvilleStripped345M.npz --optimizer sgd --learning_rate 0.001 --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
 	a. To resume from the latest checkpoint (there will be a folder checkpoint) just run the line from 5. again
 	b. To resume from a specific checkpoint "python train.py --restore_from path/to/checkpoint --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
 	c. To start fresh either delete the folder or run "python train.py --restore_from "fresh" --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
 
-### Generating ###
+### Generating Samples ###
+1. Create a folder in "models" with your trained model (e.g.: "trained")
+2. Go to your checkpoints of your model and copy "checkpoint", "model-xxx.data00000-of-00001", "model-xxx.index" and "model-xxx.meta" into the new "trained" folder
+3. Go to models/117M (or 345M if trained with it) and copy "encoder.json", "hparams.json" and "vocab.bpe" to your "trained" folder
+4. Go to gpt-2 again
+	a. Generate unconditioned samples: "python src/generate_unconditional_samples --top_p 0.9 --model_name trained"
+	b: Generate conditioned samples: "python src\interactive_conditional_samples.py --top_p 0.9 --model_name trained"
