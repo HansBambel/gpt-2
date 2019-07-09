@@ -11,12 +11,12 @@ A) Without Docker
 		c3. add them to your PATH variable:
 			C:\tools\cuda\bin
 			C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
-4. activate the conda environement ("activate gpt-2")
 B) With Docker
 
 ### Training ###
 1. Go into gpt-2 directory
 2. For Windows: "set PYTHONPATH=src" For Linux "PYTHONPATH=src"
+	a. If using an environment (with anaconda): activate the conda environement (e.g.: "activate gpt-2")
 3. (only needs to be done once) Download model "python download_model.py 117M" 	 
 4. Encode your data set as Byte-Pair Encoding (only needs to be done once per dataset) "python encode.py --model_name 117M data\<yourData>.txt data\<yourData>.npz"
 	a. Then only use the npz file for training
@@ -35,5 +35,6 @@ B) With Docker
 2. Go to your checkpoints of your model and copy "checkpoint", "model-xxx.data00000-of-00001", "model-xxx.index" and "model-xxx.meta" into the new "trained" folder
 3. Go to models/117M (or 345M if trained with it) and copy "encoder.json", "hparams.json" and "vocab.bpe" to your "trained" folder
 4. Go to gpt-2 again
-	a. Generate unconditioned samples: "python src/generate_unconditional_samples --top_p 0.9 --model_name trained"
+	a. Generate unconditioned samples: "python src/generate_unconditional_samples.py --top_p 0.9 --model_name trained"
 	b: Generate conditioned samples: "python src\interactive_conditional_samples.py --top_p 0.9 --model_name trained"
+	NOTE: "--length 100" limits the output of the samples to 100 tokens (not characters)
