@@ -1,0 +1,7 @@
+What if Spider-Man fell in love with Xena?
+Xena loved beautiful things and sought them out assiduously.
+B:I need all your creativity for this design task|A:I'll make some preliminary sketches|N:So at first, Peter designed beautiful things for Xena.
+N:Previously Princess Fiona retained Peter's services|B:my friend expects the best from you.
+N:Whereupon Peter made quite an impression on Fiona|B:you have made quite the impression haven’t you?
+N:Thus Fiona offered a personal guarantee for Peter's reliability|B:please don’t let my friend down.
+B:all in a day's work|N:Subsequently Peter impressed the hell out of Xena.
