@@ -17,7 +17,8 @@ def interact_model(
     length=None,
     temperature=1,
     top_k=0,
-    top_p=0.0
+    top_p=0.0,
+    force_cpu=False
 ):
     """
     Interactively run the model
@@ -53,7 +54,12 @@ def interact_model(
     elif length > hparams.n_ctx:
         raise ValueError("Can't get samples longer than window size: %s" % hparams.n_ctx)
 
-    with tf.Session(graph=tf.Graph()) as sess:
+    config = None
+    if force_cpu:
+        config = tf.ConfigProto(
+            device_count={'GPU': 0}
+        )
+    with tf.Session(graph=tf.Graph(), config=config) as sess:
         context = tf.placeholder(tf.int32, [batch_size, None])
         np.random.seed(seed)
         tf.set_random_seed(seed)
