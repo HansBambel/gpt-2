@@ -32,11 +32,11 @@ B) With Docker
 	Note: When using another model this needs to be done again
 	Note: it is possible to give the encoding a file or a whole directory. It will go through every file in the directory then.
 (The parameters for training a model are well described in train.py)
-5a. Train the 117M model: "python train.py --model_name 117M --run_name trained117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
-5b. python train.py --model_name 345M --run_name run345M --dataset data\writingprompts.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000
+5a. Train the 117M model: "python train.py --model_name 117M --run_name trained117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000"
+5b. "python train.py --model_name 345M --run_name run345M --dataset data\writingprompts.npz --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000"
 5c. If training the 345M model did not work due to OOM issues it is possible to use SGD instead of ADAM:
 	TODO try with memory_saving_gradients
-	"python train.py --model_name 345M --run_name run345M --dataset data\storyvilleStripped345M.npz --optimizer sgd --learning_rate 0.001 --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
+	"python train.py --model_name 345M --run_name run345M --dataset data\storyvilleStripped345M.npz --optimizer sgd --learning_rate 0.001 --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000"
 	a. To resume from the latest checkpoint (there will be a folder checkpoint) just run the line from 5. again
 	b. To resume from a specific checkpoint "python train.py --restore_from path/to/checkpoint --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
 	c. To start fresh either delete the folder or run "python train.py --restore_from "fresh" --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000"
