@@ -58,5 +58,7 @@ B) With Docker
 	a. Check what modules are available: "module avail" (these can be loaded in the script "module load <module-name>")
 3. Create a .sh script to submit a job to the cluster with specifications about the script
 	a. Submitting a job to the cluster: "sbatch myjob.sh" and gives back a jobid
+		Note0: To use GPU: "sbatch --partition=csgpu myjob.sh"
+		Note1: Also make sure that you specify "#SBATCH --gres=gpu:1" otherwise your job will end up in the queue but not start
 	b. Check running jobs: "squeue"
 	c. Cancel running job: "scancel <jobid>"
