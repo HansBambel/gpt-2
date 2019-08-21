@@ -1,4 +1,4 @@
-## Training with Tensorflow
+## Using Tensorflow
 ### Set-up ###
 ##### A) Without Docker
 1. Clone this repository
@@ -29,15 +29,15 @@
 	a. If using an environment (with anaconda): activate the conda environement (e.g.: `activate gpt-2`)
 3. (only needs to be done once) Download model `python download_model.py 117M` 	 
 4. Encode your data set as Byte-Pair Encoding (only needs to be done once per dataset) `python encode.py --model_name 117M data\<yourData>.txt data\<yourData>.npz`
-	a. Then only use the npz file for training
-	Note: When using another model this needs to be done again
-	Note: it is possible to give the encoding a file or a whole directory. It will go through every file in the directory then.
+	- Then only use the npz file for training
+	- Note: When using another model this needs to be done again
+	- Note: it is possible to give the encoding a file or a whole directory. It will go through every file in the directory then.
 (The parameters for training a model are well described in train.py)
-5. Train the 117M model: `python train.py --model_name 117M --run_name trained117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000`
-   - Train the 345M model: `python train.py --model_name 345M --run_name run345M --dataset data\writingprompts.npz --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000`
+5. Train the 117M model: `python train.py --model_name 117M --run_name <yourModelName> --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000`
+   - Train the 345M model: `python train.py --model_name 345M --run_name <yourModelName> --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000`
    - If training the 345M model did not work due to OOM issues it is possible to use SGD instead of ADAM:
 	 - TODO try with memory_saving_gradients
-   - `python train.py --model_name 345M --run_name run345M --dataset data\storyvilleStripped345M.npz --optimizer sgd --learning_rate 0.001 --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000`
+   - `python train.py --model_name 345M --run_name <yourModelName> --dataset data\<yourData>.npz --optimizer sgd --learning_rate 0.001 --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000`
 	 - To resume from the latest checkpoint (there will be a folder checkpoint) just run the line from 5. again
 	 - To resume from a specific checkpoint `python train.py --restore_from path/to/checkpoint --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000`
 	 - To start fresh either delete the folder or run `python train.py --restore_from `fresh` --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000`
@@ -47,9 +47,9 @@
 2. Go to your checkpoints of your model and copy `checkpoint`, `model-xxx.data00000-of-00001`, `model-xxx.index` and `model-xxx.meta` into the new `trained` folder
 3. Go to models/117M (or 345M if trained with it) and copy `encoder.json`, `hparams.json` and `vocab.bpe` to your `trained` folder
 4. Go to gpt-2 again
-	a. Generate unconditioned samples: `python src/generate_unconditional_samples.py --top_p 0.9 --model_name trained --nsamples 3`
-	b: Generate conditioned samples: `python src\interactive_conditional_samples.py --top_p 0.9 --model_name trained`
-	c: Generate conditioned samples using a text file: `python src\conditional_samples_with_input.py --top_p 0.9 --model_name 117M --nsamples 3 --length 80 < input.txt`
+	1. Generate unconditioned samples: `python src/generate_unconditional_samples.py --top_p 0.9 --model_name <yourModelName> --nsamples 3`
+	2. Generate conditioned samples: `python src\interactive_conditional_samples.py --top_p 0.9 --model_name <yourModelName>`
+	3. Generate conditioned samples using a text file: `python src\conditional_samples_with_input.py --top_p 0.9 --model_name 117M --nsamples 3 --length 80 < input.txt`
 	- NOTE: `--length 100` limits the output of the samples to 100 tokens (not characters or words)
 	- NOTE2: In input.txt the text that is used to condition the model is put.
 	
