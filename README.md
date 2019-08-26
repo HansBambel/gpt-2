@@ -52,6 +52,7 @@
 	3. Generate conditioned samples using a text file: `python src\conditional_samples_with_input.py --top_p 0.9 --model_name 117M --nsamples 3 --length 80 < input.txt`
 	- NOTE: `--length 100` limits the output of the samples to 100 tokens (not characters or words)
 	- NOTE2: In input.txt the text that is used to condition the model is put.
+	- NOTE3: The checkpoint of the model specified in the `model_checkpoint_path` in the checkpoint file is the one that is used.
 	
 ---
 ### Using the cluster (Cluster uses SLURM) ###
