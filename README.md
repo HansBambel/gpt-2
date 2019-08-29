@@ -4,7 +4,7 @@
 1. Clone this repository
 2. Have python installed
 3. Install the requirements of the requirements.txt
-	1. This can be done with anaconda or pip (e.g.:pip install tqdm) (I used a conda environment `gpt-2` that was a clone of the basic python env) `conda create --name gpt-2 --clone base`
+	1. This can be done with anaconda (`conda install tqdm`) or pip (e.g.:`pip install tqdm`) (I used a conda environment `gpt-2` that was a clone of the basic python env) `conda create --name gpt-2 --clone base`
 	2. Install tensorflow (for CPU `pip install tensorflow`, for GPU `pip install tensorflow-gpu`)
 	3. If you want to use the GPU you also need to install CUDA 10.0 (Tensorflow 1.14 did not find files from CUDA 10.1) and cuDNN 7.6.1 (https://developer.nvidia.com/cuda-downloads)
 		1. On windows you also need VisualStudio 2017 (I installed 2019 first, may also work), but the CUDA installation will tell you that
@@ -59,7 +59,15 @@
 1. Get access to the cluster [Link to Sonic](https://www.ucd.ie/itservices/ourservices/researchit/computeclusters/sonicuserguide/)
 2. Use Putty or ssh to connect to cluster
 	- Check what modules are available: `module avail` (these can be loaded in the script `module load <module-name>`)
-3. Create a .sh script to submit a job to the cluster with specifications about the script
+3. Use conda to create a virtual environment `conda create --name gpt-2 --clone base`
+    1. `conda activate gpt-2`
+    2. `conda install --file requirements.txt`
+    3. `conda install tensorflow-gpu`
+    4. Create a data folder (`mkdir data`) and put your dataset in it
+        - If not yet Byte-Pair-Encoded do that (see [Training](#training))
+        - 
+    
+4. Create a .sh script to submit a job to the cluster with specifications about the script (example script is given)
 	- Submitting a job to the cluster: `sbatch myjob.sh` and gives back a jobid
 		- To use GPU: `sbatch --partition=csgpu myjob.sh`
 		- Also make sure that you specify `#SBATCH --gres=gpu:1` otherwise your job will end up in the queue but not start
