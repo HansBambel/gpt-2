@@ -45,6 +45,7 @@
 ### Generating Samples ###
 1. Create a folder in `models` with your trained model (e.g.: `trained`)
 2. Go to your checkpoints of your model and copy `checkpoint`, `model-xxx.data00000-of-00001`, `model-xxx.index` and `model-xxx.meta` into the new `trained` folder
+   - Note: the model specified in the top line of `checkpoint` is used
 3. Go to models/117M (or 345M if trained with it) and copy `encoder.json`, `hparams.json` and `vocab.bpe` to your `trained` folder
 4. Go to gpt-2 again
 	1. Generate unconditioned samples: `python src/generate_unconditional_samples.py --top_p 0.9 --model_name <yourModelName> --nsamples 3`
