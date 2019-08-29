@@ -4,29 +4,29 @@
 1. Clone this repository
 2. Have python installed
 3. Install the requirements of the requirements.txt
-	a. This can be done with anaconda or pip (e.g.:pip install tqdm) (I used a conda environment `gpt-2` that was a clone of the basic python env) `conda create --name gpt-2 --clone base`
-	b. Install tensorflow (for CPU `pip install tensorflow`, for GPU `pip install tensorflow-gpu`)
-	c. If you want to use the GPU you also need to install CUDA 10.0 (Tensorflow 1.14 did not find files from CUDA 10.1) and cuDNN 7.6.1 (https://developer.nvidia.com/cuda-downloads)
-		c1. On windows you also need VisualStudio 2017 (I installed 2019 first, may also work), but the CUDA installation will tell you that
-		c2. I had the issue that when running 
-		c3. add them to your PATH variable:
-			C:\tools\cuda\bin
-			C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
+	1. This can be done with anaconda or pip (e.g.:pip install tqdm) (I used a conda environment `gpt-2` that was a clone of the basic python env) `conda create --name gpt-2 --clone base`
+	2. Install tensorflow (for CPU `pip install tensorflow`, for GPU `pip install tensorflow-gpu`)
+	3. If you want to use the GPU you also need to install CUDA 10.0 (Tensorflow 1.14 did not find files from CUDA 10.1) and cuDNN 7.6.1 (https://developer.nvidia.com/cuda-downloads)
+		1. On windows you also need VisualStudio 2017 (I installed 2019 first, may also work), but the CUDA installation will tell you that
+		2. I had the issue that when running 
+		3. add them to your PATH variable:
+			- C:\tools\cuda\bin
+			- C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
 ##### B) With Docker (more detail in [Docker Chapter](#using-docker))
 1. Install Docker
 2. Clone this repository
 3. Build the docker image: `docker build --tag=transformers .`
 4. Run an interactive and detached image: `docker run -it -d transformers`
-	a: To get the running containers: `docker ps` -a shows all (also stopped containers)
-	b. To copy files to the running docker image: `docker cp wordvectors/ <container-name>:/gpt-2`
-	c. To copy files from the running docker image to the host: `docker cp <container-name>:/gpt-2 .`
+	1. To get the running containers: `docker ps` -a shows all (also stopped containers)
+	2. To copy files to the running docker image: `docker cp wordvectors/ <container-name>:/gpt-2`
+	3. To copy files from the running docker image to the host: `docker cp <container-name>:/gpt-2 .`
 5. To enter the running docker image: `docker exec -it <container-name>`
 
 
 ### Training ###
 1. Go into gpt-2 directory
-2. For Windows: `set PYTHONPATH=src` For Linux `PYTHONPATH=src`
-	a. If using an environment (with anaconda): activate the conda environement (e.g.: `activate gpt-2`)
+   - (Not needed anymore) For Windows: `set PYTHONPATH=src` For Linux `PYTHONPATH=src`
+2. If using an environment (with anaconda): activate the conda environement (e.g.: `activate gpt-2`)
 3. (only needs to be done once) Download model `python download_model.py 117M` 	 
 4. Encode your data set as Byte-Pair Encoding (only needs to be done once per dataset) `python encode.py --model_name 117M data\<yourData>.txt data\<yourData>.npz`
 	- Then only use the npz file for training

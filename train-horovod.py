@@ -12,8 +12,8 @@ import time
 
 import horovod.tensorflow as hvd
 
-import model, sample, encoder
-from load_dataset import load_dataset, Sampler
+from src import model, sample, encoder
+from src.load_dataset import load_dataset, Sampler
 
 CHECKPOINT_DIR = 'checkpoint'
 SAMPLE_DIR = 'samples'
