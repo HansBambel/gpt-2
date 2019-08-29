@@ -61,7 +61,8 @@
 	- Check what modules are available: `module avail` (these can be loaded in the script `module load <module-name>`)
 3. Use conda to create a virtual environment `conda create --name gpt-2 --clone base`
     1. `conda activate gpt-2`
-    2. `conda install --file requirements.txt`
+        - if not already done: `conda config --add channels conda-forge`
+    2. `conda install --file requirements.txt` or install with `pip install requirements.txt`
     3. `conda install tensorflow-gpu`
     4. Create a data folder (`mkdir data`) and put your dataset in it
         - If not yet Byte-Pair-Encoded do that (see [Training](#training))
