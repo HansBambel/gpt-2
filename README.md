@@ -40,7 +40,7 @@
    - `python train.py --model_name 345M --run_name <yourModelName> --dataset data\<yourData>.npz --optimizer sgd --learning_rate 0.001 --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000`
 	 - To resume from the latest checkpoint (there will be a folder checkpoint) just run the line from 5. again
 	 - To resume from a specific checkpoint `python train.py --restore_from path/to/checkpoint --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000`
-	 - To start fresh either delete the folder or run `python train.py --restore_from `fresh` --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000`
+	 - To start fresh either delete the folder or run `python train.py --restore_from 'fresh' --model_name 117M --dataset data\<yourData>.npz --batch_size 1 --top_p 0.9 --save_every 2500 --sample_every 1000`
 
 ### Generating Samples ###
 1. Create a folder in `models` with your trained model (e.g.: `trained`)
@@ -58,18 +58,17 @@
 ---
 ### Using the cluster (Cluster uses SLURM) ###
 1. Get access to the cluster [Link to Sonic](https://www.ucd.ie/itservices/ourservices/researchit/computeclusters/sonicuserguide/)
-2. Use Putty or ssh to connect to cluster
+2. Use Putty or ssh to connect to cluster (explanation how is given in link above)
 	- Check what modules are available: `module avail` (these can be loaded in the script `module load <module-name>`)
 3. Use conda to create a virtual environment `conda create --name gpt-2 --clone base`
     1. `conda activate gpt-2`
         - if not already done: `conda config --add channels conda-forge`
-    2. `conda install --file requirements.txt` or install with `pip install requirements.txt`
+    2. `conda install --file requirements.txt` or install with `pip install -r requirements.txt`
     3. `conda install tensorflow-gpu`
     4. Create a data folder (`mkdir data`) and put your dataset in it
-        - If not yet Byte-Pair-Encoded do that (see [Training](#training))
-        - 
+        - If not yet Byte-Pair-Encoded do that by specifying the last line of the script `encodeDataset.sh` with your configuration (see [Training](#training))
     
-4. Create a .sh script to submit a job to the cluster with specifications about the script (example script is given)
+4. Create a .sh script to submit a job to the cluster with specifications about the script (example script is given in `finetuneGPT345M.sh`)
 	- Submitting a job to the cluster: `sbatch myjob.sh` and gives back a jobid
 		- To use GPU: `sbatch --partition=csgpu myjob.sh`
 		- Also make sure that you specify `#SBATCH --gres=gpu:1` otherwise your job will end up in the queue but not start
