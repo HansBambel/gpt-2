@@ -9,7 +9,7 @@
 
 #SBATCH --mail-type=ALL
 
-#SBATCH --mail-user=kevin.trebing@ucdconnect.ie
+#SBATCH --mail-user=<YourEmailHere>
 
 #SBATCH --job-name=finetuneGPT2
 

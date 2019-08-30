@@ -57,6 +57,7 @@
 	
 ---
 ### Using the cluster (Cluster uses SLURM) ###
+##### Important: Don't run your python files on the cluster, but use a script in which you specify the python script to run (explained below)
 1. Get access to the cluster [Link to Sonic](https://www.ucd.ie/itservices/ourservices/researchit/computeclusters/sonicuserguide/)
 2. Use Putty or ssh to connect to cluster (explanation how is given in link above)
 	- Check what modules are available: `module avail` (these can be loaded in the script `module load <module-name>`)
