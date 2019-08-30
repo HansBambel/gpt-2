@@ -15,11 +15,12 @@
 
 cd $SLURM_SUBMIT_DIR
 
+# load the conda environment (if you have one)
+conda activate gpt-2
+
 # load the required modules
 module load cuda
-module load tensorflowgpu
+# module load tensorflowgpu
 
 # execute the code
-# conda activate gpt-2
-# pip3 install --user toposort
 python3 train.py --model_name 345M --run_name writingprompts345M --dataset data/wpdump_cleaned345M.npz --batch_size 1 --top_p 0.9 --save_every 2000 --sample_every 1000
