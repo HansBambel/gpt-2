@@ -6,7 +6,7 @@
 3. Install the requirements of the requirements.txt
 	1. This can be done with anaconda (`conda install tqdm`) or pip (e.g.:`pip install tqdm`) (I used a conda environment `gpt-2` that was a clone of the basic python env) `conda create --name gpt-2 --clone base`
 	2. Install tensorflow (for CPU `pip install tensorflow`, for GPU `pip install tensorflow-gpu`)
-	3. If you want to use the GPU you also need to install CUDA (Tensorflow 1.14 did not find files from CUDA 10.1, because it relies on CUDA 10.0 (https://www.joe0.com/2019/10/19/how-resolve-tensorflow-2-0-error-could-not-load-dynamic-library-cudart64_100-dll-dlerror-cudart64_100-dll-not-found/ helped with the missing file) and cuDNN 7.6.1 (https://developer.nvidia.com/cuda-downloads)
+	3. If you want to use the GPU you also need to install CUDA (Tensorflow 1.14 did not find files from CUDA 10.1, because it relies on CUDA 10.0 ([This link](https://www.joe0.com/2019/10/19/how-resolve-tensorflow-2-0-error-could-not-load-dynamic-library-cudart64_100-dll-dlerror-cudart64_100-dll-not-found/) helped with the missing file)) and cuDNN 7.6.1 (https://developer.nvidia.com/cuda-downloads)
 		1. On windows you also need VisualStudio 2017 (I installed 2019 first, may also work), but the CUDA installation will tell you that (Only need C++ for Windows Development in the install menu)
 		2. I had the issue that when running 
 		3. add them to your PATH variable if not done by cuDNN already:
